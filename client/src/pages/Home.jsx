@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>Home
       <div className='flex gap-2 text-blue-600'>
-        <Link to="/login">Login</Link>
+        <Link to="/contact">Contact</Link>
         <Link to="/registration">Registration</Link>
         <Link to="/logout">Logout</Link>
       </div>

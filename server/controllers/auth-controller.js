@@ -110,16 +110,22 @@ const login = async (req, res) => {
 // |--------------------------------------------------|
 // |      User logic- to send user data               |
 // |--------------------------------------------------|
+
+
 const user = async (req, res) => {
   try {
-    // req.user is set by authMiddleware
-    const userData = await User.findById(req.user.id).select("-password");
+    const userData = await User
+      .findById(req.user.id)
+      .select("username email");
 
     res.status(200).json(userData);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+module.exports = { user };
+
 
 module.exports = {
   home,
