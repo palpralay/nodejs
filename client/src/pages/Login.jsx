@@ -1,9 +1,10 @@
-import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { Appcontext } from "../context/Appcontext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,6 +17,10 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!user.email || !user.password) {
+      toast.error("Email and password are required");
+      return;
+    }
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/login`,
@@ -41,6 +46,7 @@ const Login = () => {
       });
 
       console.log("User logged in successfully");
+      toast.success("User logged in successfully");
       navigate("/");
     } catch (error) {
       // axios error handling

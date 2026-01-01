@@ -57,7 +57,7 @@ const register = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
     });
 
-    console.log("User registered:", createdUser, "Token:", token);
+    // console.log("User registered:", createdUser, "Token:", token);
 
     res.status(201).send({ message: "User registered successfully", token });
   } catch (error) {
@@ -99,7 +99,7 @@ const login = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
     });
 
-    console.log("User logged in:", user, "Token:", token);
+    // console.log("User logged in:", user, "Token:", token);
 
     res.status(200).send({ message: "Login successful", token });
   } catch (error) {

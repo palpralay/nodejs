@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { Appcontext } from "../context/Appcontext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -12,6 +14,9 @@ const Registration = () => {
     phone: "",
     password: "",
   });
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const { storeToken } = useContext(Appcontext);
 
@@ -19,7 +24,20 @@ const Registration = () => {
     e.preventDefault();
 
     if (!user.username || !user.email || !user.phone || !user.password) {
-      return alert("All fields are required");
+      toast.error("All fields are required");
+      return;
+    }
+    if (user.password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    if (user.phone.length < 10) {
+      toast.error("Phone number must be at least 10 digits");
+      return;
+    }
+    if (!isValidEmail(user.email)) {
+      toast.error("Please enter a valid email address");
+      return;
     }
 
     try {
@@ -34,7 +52,7 @@ const Registration = () => {
         }
       );
 
-      console.log(data);
+      // console.log(data);
 
       //set token
       storeToken(data.token);
@@ -46,7 +64,7 @@ const Registration = () => {
         phone: "",
         password: "",
       });
-
+      toast.success("User registered successfully");
       console.log("User registered successfully");
       navigate("/");
     } catch (error) {

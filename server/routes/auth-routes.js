@@ -6,7 +6,7 @@ const { signupSchema } = require("../validators/auth-validators");
 const { loginSchema } = require("../validators/login-validator");
 const authMiddleware = require("../middlewares/auth-middleware"); 
 
-router.route("/").get(authControllers.home);
+router.route("/").get(authMiddleware, authControllers.home);
 router.route("/user").get(authMiddleware, authControllers.user);
 router.route("/register").post(validateBody(signupSchema), authControllers.register);
 router.route("/login").post(validateBody(loginSchema), authControllers.login);

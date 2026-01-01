@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth-routes");
 const contactRoutes = require("./routes/contact-router");
+const adminRoutes = require("./routes/admin-route");
 const connectDB = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 const cors = require("cors");
@@ -28,6 +29,8 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/form", contactRoutes);
+app.use("/api/admin",adminRoutes); 
+app.use("/api/admin/contacts",contactRoutes); 
 
 // Error Middleware
 app.use(errorMiddleware);

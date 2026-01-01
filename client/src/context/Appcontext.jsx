@@ -34,7 +34,7 @@ const AppcontextProvider = ({ children }) => {
     if(response.ok){
       const data = await response.json();
       setUserData(data)
-      console.log("User authenticated:", data);
+      // console.log("User authenticated:", data);
     }
   };
 
